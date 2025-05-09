@@ -59,8 +59,8 @@ export default function InfoBox({ info }) {
     selectedVideo = RAINY_URL;
     selectedMusic = RAINY_MUSIC_URL;
   } else if (weather.includes("sky")) {
-    selectedVideo = CLEAR_URL;
-    selectedMusic = CLEAR_MUSIC_URL;
+    selectedVideo = SNOW_URL;
+    selectedMusic = SNOW_MUSIC_URL;
   } else if (weather.includes("cloud")) {
     selectedVideo = CLOUDY_URL;
     selectedMusic = CLOUDY_MUSIC_URL;
