@@ -27,6 +27,13 @@ export default function InfoBox({ info }) {
   const MILD_URL =
     "https://videos.pexels.com/video-files/31985086/13629832_1920_1080_30fps.mp4";
 
+  const FEW_URL =
+    "https://videos.pexels.com/video-files/2818564/2818564-uhd_2560_1440_24fps.mp4";
+  const SCATTERED_URL =
+    "https://videos.pexels.com/video-files/2815411/2815411-uhd_1920_1440_24fps.mp4";
+  const OVERCAST_URL =
+    "https://videos.pexels.com/video-files/4318100/4318100-uhd_2560_1440_30fps.mp4";
+
   const ATMOSHPHERE_MUSIC_URL = "/music/dry-music.mp3";
   const SNOW_MUSIC_URL = "/music/snow.mp3";
   const THUNDER_MUSIC_URL = "/music/thunder-music.mp3";
@@ -34,6 +41,9 @@ export default function InfoBox({ info }) {
   const COLD_MUSIC_URL = "/music/cold-music.mp3";
   const CLOUDY_MUSIC_URL = "/music/cold-music.mp3";
   const CLEAR_MUSIC_URL = "/music/windy-music.mp3";
+  const FEW_MUSIC_URL = "/music/few.mp3";
+  const SCATTERED_MUSIC_URL = "/music/overacast.mp3";
+  const OVERCAST_MUSIC_URL = "/music/overacast.mp3";
   const WINDY_MUSIC_URL = "/music/windy-music.mp3";
   const MILD_MUSIC_URL = "/music/windy-music.mp3";
 
@@ -59,8 +69,17 @@ export default function InfoBox({ info }) {
     selectedVideo = RAINY_URL;
     selectedMusic = RAINY_MUSIC_URL;
   } else if (weather.includes("sky")) {
-    selectedVideo = SNOW_URL;
-    selectedMusic = SNOW_MUSIC_URL;
+    selectedVideo = CLEAR_URL;
+    selectedMusic = CLEAR_MUSIC_URL;
+  } else if (weather.includes("few")) {
+    selectedVideo = FEW_URL;
+    selectedMusic = FEW_MUSIC_URL;
+  } else if (weather.includes("overcast")) {
+    selectedVideo = OVERCAST_URL;
+    selectedMusic = OVERCAST_MUSIC_URL;
+  } else if (weather.includes("scattered")) {
+    selectedVideo = SCATTERED_URL;
+    selectedMusic = SCATTERED_MUSIC_URL;
   } else if (weather.includes("cloud")) {
     selectedVideo = CLOUDY_URL;
     selectedMusic = CLOUDY_MUSIC_URL;
