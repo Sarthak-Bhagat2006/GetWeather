@@ -4,29 +4,33 @@ import "./SearchBox.css";
 import { use, useState } from "react";
 export default function SearchBox({ updateInfo }) {
   let [city, setCity] = useState("");
-  let [err, setErr] = useState(false);
+  let [error, setError] = useState(false);
 
   const API_URL = "https://api.openweathermap.org/data/2.5/weather";
   const API_KEY = "2c29b1eb25c35dbc7f9ff2b469e2b502";
 
   let getWeatherInfo = async () => {
-    let responce = await fetch(
-      `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
-    );
-    let jsonResponce = await responce.json();
-    console.log(jsonResponce);
-    let result = {
-      city: city,
-      temp: jsonResponce.main.temp,
-      tempMin: jsonResponce.main.temp_min,
-      tempMax: jsonResponce.main.temp_max,
-      humidity: jsonResponce.main.humidity,
-      feels_like: jsonResponce.main.feels_like,
-      windSpeed: jsonResponce.wind.speed,
-      weather: jsonResponce.weather[0].description,
-    };
-    console.log(result);
-    return result;
+    try {
+      let responce = await fetch(
+        `${API_URL}?q=${city}&appid=${API_KEY}&units=metric`
+      );
+      let jsonResponce = await responce.json();
+      console.log(jsonResponce);
+      let result = {
+        city: city,
+        temp: jsonResponce.main.temp,
+        tempMin: jsonResponce.main.temp_min,
+        tempMax: jsonResponce.main.temp_max,
+        humidity: jsonResponce.main.humidity,
+        feels_like: jsonResponce.main.feels_like,
+        windSpeed: jsonResponce.wind.speed,
+        weather: jsonResponce.weather[0].description,
+      };
+      console.log(result);
+      return result;
+    } catch (error) {
+      throw error;
+    }
   };
 
   let handleChange = (event) => {
@@ -34,12 +38,17 @@ export default function SearchBox({ updateInfo }) {
   };
 
   let handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(city);
-    setCity("");
-    let newInfo = await getWeatherInfo();
-    console.log(newInfo);
-    updateInfo(newInfo);
+    try {
+      event.preventDefault();
+      setError(false);
+      console.log(city);
+      let newInfo = await getWeatherInfo();
+      console.log(newInfo);
+      updateInfo(newInfo);
+      setCity("");
+    } catch (error) {
+      setError(true);
+    }
   };
   return (
     <div className="SearchBox">
@@ -108,6 +117,12 @@ export default function SearchBox({ updateInfo }) {
         >
           Search
         </Button>
+        {error && (
+          <p style={{ color: "red", fontWeight: "bold" }}>
+            Oops! We couldn’t find that place. Please make sure the name is
+            correct and try again.
+          </p>
+        )}
       </form>
     </div>
   );
